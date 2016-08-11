@@ -1,0 +1,19 @@
+{% extends "Layout.twig" %}
+
+{% block content %}
+Hello {{ test }}
+
+    {% for row in debug %}
+        <table>
+            <tr>
+                {% for key, column in row %}
+                    <td>{{ key }}</td>
+                    <td>{{ column }}</td>
+                {% endfor %}
+            </tr>
+        </table>
+    {% endfor %}
+
+{% endblock %}
+
+{% block title %}Testing{% endblock %}

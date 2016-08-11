@@ -1,9 +1,12 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: wanushmi
- * Date: 24.06.2016
- * Time: 13:44
+ * TwigRenderer.php
+ * Date: 10.08.2016
+ * Time: 17:30
+ * PHP version 5
+ *
+ * @author    Michael Wanush <michael.wanush@sunzinet.com>
+ * @copyright 2016 sunzinet AG
  */
 
 namespace Wanush\Template;
@@ -12,15 +15,22 @@ use Twig_Environment;
 
 /**
  * Class TwigRenderer
+ *
  * @package DocSearch\Template
  */
 class TwigRenderer implements Renderer
 {
-    private $renderer;
+    /**
+     * Renderer
+     *
+     * @var Twig_Environment
+     */
+    protected $renderer;
 
     /**
      * TwigRenderer constructor.
-     * @param Twig_Environment $renderer
+     *
+     * @param Twig_Environment $renderer Renderer
      */
     public function __construct(Twig_Environment $renderer)
     {
@@ -28,8 +38,11 @@ class TwigRenderer implements Renderer
     }
 
     /**
-     * @param string $template
-     * @param array $data
+     * Render
+     *
+     * @param string $template Template
+     * @param array  $data     Data
+     *
      * @return string
      */
     public function render($template, $data = [])
