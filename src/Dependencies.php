@@ -11,8 +11,6 @@
 
 $injector = new \Auryn\Injector;
 
-$injector = new \Auryn\Injector;
-
 $injector->alias('Http\Request', 'Http\HttpRequest');
 $injector->share('Http\HttpRequest');
 $injector->define(
@@ -48,5 +46,9 @@ $injector->delegate(
         return $twig;
     }
 );
+
+$injector->defineParam('configuration', $configuration);
+$injector->defineParam('config', $config);
+$injector->defineParam('entityManager', $entityManager);
 
 return $injector;
