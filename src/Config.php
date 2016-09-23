@@ -13,9 +13,11 @@ return [
     'error_reporting' => E_ALL,
     'environment' => 'development',
     'database' => [
-        'hostname' => 'localhost',
-        'username' => 'mwanush',
-        'password' => 'Ram0nes',
-        'database' => 'mike'
+        'driver' => 'pdo_mysql',
+        'host'   => 'localhost',
+        'user'   => 'mwanush',
+        'pass'   => 'Ram0nes',
+        'dbname' => 'mike',
+        'charset'=> 'utf8'
     ]
 ];

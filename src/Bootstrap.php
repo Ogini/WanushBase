@@ -11,8 +11,15 @@
 
 namespace Wanush;
 
+use FastRoute\Dispatcher;
+use FastRoute\RouteCollector;
+use Http\HttpRequest;
+use Http\HttpResponse;
+use Whoops\Handler\PrettyPageHandler;
+use Whoops\Run;
+
 require __DIR__ . '/../vendor/autoload.php';
-$configuration = include 'Config.php';
+$configuration = include __DIR__ . '/Config.php';
 
 error_reporting($configuration['error_reporting']);
 
@@ -21,9 +28,9 @@ $environment = $configuration['environment'];
 /**
  * Register the error handler
  */
-$whoops = new \Whoops\Run;
+$whoops = new Run;
 if ($environment !== 'production') {
-    $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+    $whoops->pushHandler(new PrettyPageHandler);
 } else {
     $whoops->pushHandler(function ($e) {
         echo 'Friendly error page and send an email to the developer';
@@ -31,13 +38,16 @@ if ($environment !== 'production') {
 }
 $whoops->register();
 
-$injector = include 'Dependencies.php';
+$injector = include __DIR__ . '/Dependencies.php';
 
+/** @var HttpRequest $request */
 $request = $injector->make('Http\HttpRequest');
+/** @var HttpResponse $response */
 $response = $injector->make('Http\HttpResponse');
 
-$routeDefinitionCallback = function (\FastRoute\RouteCollector $r) {
-    $routes = include('Routes.php');
+$routeDefinitionCallback = function (RouteCollector $r) {
+    /** @var array $routes */
+    $routes = include __DIR__ . '/Routes.php';
     foreach ($routes as $route) {
         $r->addRoute($route[0], $route[1], $route[2]);
     }
@@ -47,17 +57,16 @@ $dispatcher = \FastRoute\simpleDispatcher($routeDefinitionCallback);
 
 $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getPath());
 switch ($routeInfo[0]) {
-    case \FastRoute\Dispatcher::NOT_FOUND:
+    case Dispatcher::NOT_FOUND:
         $response->setContent('404 - Page not found');
         $response->setStatusCode(404);
         break;
-    case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+    case Dispatcher::METHOD_NOT_ALLOWED:
         $response->setContent('405 - Method not allowed');
         $response->setStatusCode(405);
         break;
-    case \FastRoute\Dispatcher::FOUND:
-        $className = $routeInfo[1][0];
-        $method = $routeInfo[1][1];
+    case Dispatcher::FOUND:
+        list($className, $method) = $routeInfo[1];
         $vars = $routeInfo[2];
 
         $class = $injector->make($className);

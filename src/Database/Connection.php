@@ -11,7 +11,7 @@
 
 namespace Wanush\Database;
 
-use \PDO;
+use PDO;
 
 /**
  * Class Connection
@@ -27,15 +27,18 @@ class Connection extends PDO
      */
     public function __construct($connectionData)
     {
-        $configuration = array_values($connectionData);
-        list($host, $user, $pass, $db) = $configuration;
-        $charset = 'utf8';
+        /** @var string $host */
+        /** @var string $dbname */
+        /** @var string $user */
+        /** @var string $pass */
+        /** @var string $charset */
+        extract($connectionData, EXTR_OVERWRITE);
 
-        $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+        $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
         $options = [
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES   => false,
+            PDO::ATTR_EMULATE_PREPARES => false,
         ];
 
         parent::__construct($dsn, $user, $pass, $options);

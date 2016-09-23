@@ -10,5 +10,6 @@
  */
 
 return [
-    ['GET', '[/]', ['Wanush\Controllers\Index', 'index']]
+    ['GET', '[/]', ['Wanush\Controllers\Index', 'index']],
+    ['GET', '/test', ['Wanush\Controllers\Index', 'index']],
 ];

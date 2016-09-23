@@ -26,5 +26,5 @@ interface Renderer
      *
      * @return mixed
      */
-    public function render($template, $data = []);
+    public function render($template, array $data = []);
 }

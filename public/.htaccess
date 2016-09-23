@@ -1,0 +1,20 @@
+<FilesMatch "\.(js|css|gif|png|jpe?g|GIF|PNG|JPE?G|PDF)$">
+    <IfModule mod_expires.c>
+        ExpiresActive on
+        ExpiresDefault "access plus 7 days"
+    </IfModule>
+    FileETag MTime Size
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Do not rewrite any static resources
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d [OR]
+    RewriteCond %{REQUEST_FILENAME} -l
+    RewriteRule .* - [L]
+
+    # If the file/symlink/directory does not exist => Redirect to index.php.
+    RewriteRule .* index.php [L]
+</IfModule>

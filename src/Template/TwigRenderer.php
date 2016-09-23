@@ -44,8 +44,9 @@ class TwigRenderer implements Renderer
      * @param array  $data     Data
      *
      * @return string
+     * @throws \Twig_Error_Loader
      */
-    public function render($template, $data = [])
+    public function render($template, array $data = [])
     {
         return $this->renderer->render("$template.twig", $data);
     }
