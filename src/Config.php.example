@@ -14,10 +14,10 @@ return [
     'environment' => 'development',
     'database' => [
         'driver' => 'pdo_mysql',
-        'host'   => 'localhost',
-        'user'   => 'mwanush',
-        'pass'   => 'Ram0nes',
-        'dbname' => 'mike',
+        'host'   => '<localhost>',
+        'user'   => '<username>',
+        'pass'   => '<password>',
+        'dbname' => '<database>',
         'charset'=> 'utf8'
     ]
 ];
