@@ -11,8 +11,6 @@
 
 namespace Wanush;
 
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Tools\Setup;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 use Http\HttpRequest;
@@ -22,8 +20,6 @@ use Whoops\Run;
 
 require __DIR__ . '/../vendor/autoload.php';
 $configuration = include __DIR__ . '/Config.php';
-$config = Setup::createAnnotationMetadataConfiguration([__DIR__ . '/Models'], true);
-$entityManager = EntityManager::create($configuration['database'], $config);
 
 error_reporting($configuration['error_reporting']);
 

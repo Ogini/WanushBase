@@ -48,7 +48,5 @@ $injector->delegate(
 );
 
 $injector->defineParam('configuration', $configuration);
-$injector->defineParam('config', $config);
-$injector->defineParam('entityManager', $entityManager);
 
 return $injector;

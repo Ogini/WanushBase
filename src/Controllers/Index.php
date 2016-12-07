@@ -85,7 +85,11 @@ class Index
     public function index()
     {
         $this->data['test'] = 'Testing 1, 2, 3';
-        $this->data['debug'] = $this->db->query('SELECT * FROM users')->fetchAll(\PDO::FETCH_ASSOC);
+        try {
+            $this->data['debug'] = $this->db->query('SELECT * FROM users')->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            $this->data['debug'] = array();
+        }
 
         $html = $this->renderer->render('Index', $this->data);
         $this->response->setContent($html);
