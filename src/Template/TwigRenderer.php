@@ -12,6 +12,9 @@
 namespace Wanush\Template;
 
 use Twig_Environment;
+use Twig_Error_Loader;
+use Twig_Error_Runtime;
+use Twig_Error_Syntax;
 
 /**
  * Class TwigRenderer
@@ -41,10 +44,12 @@ class TwigRenderer implements Renderer
      * Render
      *
      * @param string $template Template
-     * @param array  $data     Data
+     * @param array $data Data
      *
      * @return string
-     * @throws \Twig_Error_Loader
+     * @throws Twig_Error_Loader
+     * @throws Twig_Error_Runtime
+     * @throws Twig_Error_Syntax
      */
     public function render($template, array $data = [])
     {

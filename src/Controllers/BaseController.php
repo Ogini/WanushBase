@@ -13,6 +13,10 @@ use Http\Response;
 use Wanush\Template\Renderer;
 use Wanush\Database\Connection;
 
+/**
+ * Class BaseController
+ * @package Wanush\Controllers
+ */
 class BaseController
 {
     /**
@@ -72,5 +76,24 @@ class BaseController
     protected function init()
     {
         //
+    }
+
+    /**
+     * Rendering Data
+     * @param string $template
+     */
+    protected function render($template = '')
+    {
+        // If a template is not defined, use the class name.
+        if ($template === '') {
+            $classPath = explode('\\', get_class($this));
+            $template = array_pop($classPath);
+        }
+        // If that file does not exist, use 'Index'
+        if (!file_exists(PATH_BASE . 'templates/' . $template . '.twig')) {
+            $template = 'Index';
+        }
+        $html = $this->renderer->render($template, $this->data);
+        $this->response->setContent($html);
     }
 }

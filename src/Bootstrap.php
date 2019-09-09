@@ -17,6 +17,9 @@ use Http\HttpRequest;
 use Http\HttpResponse;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
+use function FastRoute\simpleDispatcher;
+
+define('PATH_BASE', __DIR__ . '/../');
 
 require __DIR__ . '/../vendor/autoload.php';
 $configuration = include __DIR__ . '/Config.php';
@@ -53,7 +56,7 @@ $routeDefinitionCallback = function (RouteCollector $r) {
     }
 };
 
-$dispatcher = \FastRoute\simpleDispatcher($routeDefinitionCallback);
+$dispatcher = simpleDispatcher($routeDefinitionCallback);
 
 $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getPath());
 switch ($routeInfo[0]) {

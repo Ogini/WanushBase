@@ -12,11 +12,9 @@
 namespace Wanush\Controllers;
 
 
-/**
- * Class Index
- *
- * @package Wanush\Controllers
- */
+use PDO;
+use PDOException;
+
 /**
  * Class Index
  *
@@ -33,14 +31,11 @@ class Index extends BaseController
     {
         $this->data['test'] = 'Testing 1, 2, 3';
         try {
-            $this->data['debug'] = $this->db->query('SELECT * FROM users')->fetchAll(\PDO::FETCH_ASSOC);
-        } catch (\PDOException $e) {
-            $this->data['debug'] = array();
+            $this->data['debug'] = $this->db->query('SELECT * FROM users')->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $this->data['debug'] = array($e->getMessage());
         }
 
-        $html = $this->renderer->render('Index', $this->data);
-        $this->response->setContent($html);
+        $this->render();
     }
-
-
 }
