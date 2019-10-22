@@ -29,11 +29,11 @@ class Index extends BaseController
      */
     public function index()
     {
-        $this->data['test'] = 'Testing 1, 2, 3';
+        $this->data['name'] = 'Testing 1, 2, 3';
         try {
-            $this->data['debug'] = $this->db->query('SELECT * FROM users')->fetchAll(PDO::FETCH_ASSOC);
+            $this->data['table'] = $this->db->query('SELECT * FROM users')->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            $this->data['debug'] = array($e->getMessage());
+            $this->data['table'] = array($e->getMessage());
         }
 
         $this->render();
