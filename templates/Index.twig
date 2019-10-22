@@ -1,19 +1,14 @@
 {% extends "Layout.twig" %}
 
 {% block content %}
-Hello {{ test }}
-
-    {% for row in debug %}
-        <table>
-            <tr>
-                {% for key, column in row %}
-                    <td>{{ key }}</td>
-                    <td>{{ column }}</td>
-                {% endfor %}
-                <td>{{ row }}</td>
-            </tr>
-        </table>
-    {% endfor %}
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">Hello {{ name }}</div>
+        </div>
+        <div class="row">
+            {% include 'Components/Table.twig' with {'data': table} only %}
+        </div>
+    </div>
 
 {% endblock %}
 

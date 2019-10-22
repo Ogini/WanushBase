@@ -9,7 +9,9 @@
  * @copyright 2016 sunzinet AG
  */
 
-$injector = new \Auryn\Injector;
+use Auryn\Injector;
+
+$injector = new Injector;
 
 $injector->alias('Http\Request', 'Http\HttpRequest');
 $injector->share('Http\HttpRequest');
