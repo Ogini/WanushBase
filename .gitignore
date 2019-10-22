@@ -2,3 +2,8 @@
 /.idea
 /composer.phar
 /src/Config.php
+/node_modules/
+/public/js/
+/public/css/
+/public/dist/
+/public/static/

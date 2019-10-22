@@ -3,8 +3,9 @@
 <head>
     <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
     {% block extraHeader %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="/css/vendors~main.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/css/main.css" media="all">
 </head>
 <body>
 
@@ -15,8 +16,8 @@
     </div>
 </div>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="js/vendors~main.js"></script>
+<script src="js/main.js"></script>
 {% block extraFooter %}{% endblock %}
 </body>
 </html>

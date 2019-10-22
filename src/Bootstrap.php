@@ -33,10 +33,10 @@ $environment = $configuration['environment'];
  */
 $whoops = new Run;
 if ($environment !== 'production') {
-    $whoops->pushHandler(new PrettyPageHandler);
+    $whoops->prependHandler(new PrettyPageHandler);
 } else {
-    $whoops->pushHandler(function ($e) {
-        echo 'Friendly error page and send an email to the developer';
+    $whoops->prependHandler(function ($e) {
+        echo 'There was an error: ' . $e->getMessage();
     });
 }
 $whoops->register();

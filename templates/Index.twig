@@ -3,17 +3,7 @@
 {% block content %}
 Hello {{ test }}
 
-    {% for row in debug %}
-        <table>
-            <tr>
-                {% for key, column in row %}
-                    <td>{{ key }}</td>
-                    <td>{{ column }}</td>
-                {% endfor %}
-                <td>{{ row }}</td>
-            </tr>
-        </table>
-    {% endfor %}
+    {% include 'Table.twig' with {'data': debug} only %}
 
 {% endblock %}
 
