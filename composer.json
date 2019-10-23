@@ -17,7 +17,8 @@
     "rdlowrey/auryn": "~1.4",
     "twig/twig": "~2.5.0",
     "components/jquery": "~3.1",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "ext-json": "*"
   },
   "autoload": {
     "psr-4": {

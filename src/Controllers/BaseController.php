@@ -8,6 +8,7 @@
 
 namespace Wanush\Controllers;
 
+use Exception;
 use Http\Request;
 use Http\Response;
 use Wanush\Template\Renderer;
@@ -95,5 +96,21 @@ class BaseController
         }
         $html = $this->renderer->render($template, $this->data);
         $this->response->setContent($html);
+    }
+
+    /**
+     * Send JSON response
+     * @param array $val
+     * @param boolean $success
+     */
+    protected function returnJson($val, $success = true) {
+        $this->response->setHeader('Content-Type', 'application/json');
+        try {
+            $json = array_merge(['success' => $success], $val);
+            $json = json_encode($json);
+        } catch (Exception $ex) {
+            $json = json_encode(['success' => false, 'error' => $ex->getMessage()]);
+        }
+        $this->response->setContent($json);
     }
 }

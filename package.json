@@ -4,9 +4,9 @@
   "description": "My Base Libraries",
   "main": "src/JavaScript/index.js",
   "scripts": {
-    "dev": "webpack --config build/config.development.js",
-    "watch": "webpack --config build/config.development.js --watch",
-    "prod": "webpack --config build/config.production.js"
+    "dev": "webpack --progress --hide-modules --config build/config.development.js",
+    "watch": "webpack --progress --hide-modules --config build/config.development.js --watch",
+    "prod": "webpack --progress --config build/config.production.js"
   },
   "repository": {
     "type": "git",
@@ -26,23 +26,31 @@
   "homepage": "https://github.com/Ogini/WanushBase#readme",
   "devDependencies": {
     "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
     "babel-loader": "^8.0.6",
-    "babel-plugin-transform-class-properties": "^6.24.1",
     "bootstrap": "^4.3.1",
     "copy-webpack-plugin": "^5.0.4",
     "css-loader": "^3.2.0",
     "file-loader": "^4.2.0",
     "font-awesome": "^4.7.0",
+    "image-webpack-loader": "^6.0.0",
     "jquery": "^3.4.1",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.12.0",
     "popper.js": "^1.15.0",
+    "prop-types": "^15.7.2",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
     "webpack": "^4.41.1",
     "webpack-cli": "^3.3.9",
     "webpack-merge": "^4.2.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react": "^16.11.0",
+    "react-bootstrap": "^1.0.0-beta.14",
+    "react-dom": "^16.11.0"
+  }
 }

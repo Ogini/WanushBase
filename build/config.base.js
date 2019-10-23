@@ -1,7 +1,6 @@
 const path = require('path');
-const {SRC, DISTJS, DISTCSS, DISTIMG, DISTFONT, ASSETSJS, ASSETSCSS, ASSETSIMG, ASSETSFONT} = require('./paths');
+const {SRC, DISTJS, DISTCSS, DISTIMG, DISTFONT, ASSETSJS, ASSETSIMG} = require('./paths');
 const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const babelLoader = {
@@ -16,27 +15,51 @@ const cssExtractLoader = {
         outputPath: DISTCSS,
     }
 };
+
 const cssLoader = { loader: 'css-loader' };
 const sassLoader = { loader: 'sass-loader' };
 const imageFileLoader = {
     loader: 'file-loader',
     options: {
-        name: '[name]-[hash:6].[ext]',
-        outputPath: DISTIMG
+        name: '[name].[ext]',
+        outputPath: DISTIMG,
+        publicPath: ASSETSIMG
+    }
+};
+const imageSizeLoader = {
+    loader: 'image-webpack-loader',
+    options: {
+        mozjpeg: {
+            progressive: true,
+            quality: 65
+        },
+        // optipng.enabled: false will disable optipng
+        optipng: {
+            enabled: false,
+        },
+        pngquant: {
+            quality: [0.65, 0.90],
+            speed: 10
+        },
+        gifsicle: {
+            interlaced: false,
+        },
+        // the webp option will enable WEBP
+        webp: {
+            quality: 75
+        }
     }
 };
 const fontFileLoader = {
     loader: 'file-loader',
     options: {
-        name: '[name]-[hash:6].[ext]',
+        name: '[name].[ext]',
         outputPath: DISTFONT
     }
 };
 
 module.exports = {
-    entry: {
-        main: path.resolve(SRC, 'JavaScript', 'index.js'),
-    },
+    entry: {main: path.resolve(SRC, 'JavaScript', 'index.js')},
     output: {
         // Put all the bundled stuff in your dist folder
         path: DISTJS,
@@ -64,7 +87,7 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|jpeg|gif|ico|svg)$/,
-                use: [ imageFileLoader ]
+                use: [ imageFileLoader, imageSizeLoader ]
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -84,9 +107,6 @@ module.exports = {
             popper: 'popper.js',
             bootstrap: 'bootstrap'
         }),
-        new CopyWebpackPlugin([
-            {from: './src/assets/static', to: '../static'}
-        ]),
         new MiniCssExtractPlugin({
             filename: '../css/[name].css',
             chunkFilename: '../css/[id].css',

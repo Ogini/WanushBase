@@ -6,12 +6,10 @@ module.exports = {
 
     // The path to put the generated bundle(s)
     DISTJS: path.resolve(__dirname, '..', 'public', 'js'),
-    DISTCSS: path.resolve(__dirname, '..', 'public', 'css'),
-    DISTIMG: path.resolve(__dirname, '..', 'public', 'images'),
-    DISTFONT: path.resolve(__dirname, '..', 'public', 'fonts'),
+    DISTCSS: '../css',
+    DISTIMG: '../images',
+    DISTFONT: '../fonts',
 
     ASSETSJS: '/js',
-    ASSETSCSS: '/css',
     ASSETSIMG: '/images',
-    ASSETSFONT: '/fonts',
 };
