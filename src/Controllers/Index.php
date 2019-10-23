@@ -31,9 +31,15 @@ class Index extends BaseController
     {
         $this->data['name'] = 'Testing 1, 2, 3';
         try {
-            $this->data['table'] = $this->db->query('SELECT * FROM users')->fetchAll(PDO::FETCH_ASSOC);
+            $this->data['table'] = [
+                'success' => true,
+                'data' => $this->db->query('SELECT * FROM users')->fetchAll(PDO::FETCH_ASSOC)
+            ];
         } catch (PDOException $e) {
-            $this->data['table'] = array($e->getMessage());
+            $this->data['table'] = [
+                'success' => true,
+                'error' => $e->getMessage()
+            ];
         }
 
         $this->render();

@@ -6,7 +6,7 @@
             <div class="col text-center">Hello {{ name }}</div>
         </div>
         <div class="row">
-            {% include 'Components/Table.twig' with {'data': table} only %}
+            {% include 'Components/Table.twig' with {'table': table} only %}
         </div>
     </div>
 
@@ -14,6 +14,6 @@
 
 {% block title %}Testing{% endblock %}
 
-{% block extraHeader %}<meta name="mike" value="rules">{% endblock %}
+{% block extraHeader %}<meta name="mike" about="rules">{% endblock %}
 
 {% block extraFooter %}{% endblock %}

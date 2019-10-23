@@ -21,4 +21,4 @@ window.setInterval(function() {
     oldBackgroundColor = $(cells[cellIndex]).css('backgroundColor');
     $(cells[cellIndex]).css('backgroundColor', 'rgb(' + getRandomInt(256) + ', ' + getRandomInt(256) + ', ' + getRandomInt(256));
     oldCellIndex = cellIndex;
-}, 10);
+}, 10000);
