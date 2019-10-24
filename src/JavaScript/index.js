@@ -1,3 +1,13 @@
+/*
+ * Project: WanushBaseGH
+ * File: index.js
+ * Date: 24/10/2019, 12:04
+ * Last Change; 23/10/2019, 16:32
+ *
+ * @author Michael Wanush <mike@wanush.net>
+ * @copyright 2019 Michael Wanush
+ */
+
 import React from 'react';
 import ReactDom from 'react-dom';
 import App from './App/App';
@@ -22,8 +32,6 @@ window.onload = () => {
         document.getElementById('app2')
     );
 
-    $('body').addClass('test');
-
     const getRandomInt = max => {
         return Math.floor(Math.random() * Math.floor(max));
     };
@@ -31,7 +39,8 @@ window.onload = () => {
     let oldBackgroundColor = null;
     let oldCellIndex = null;
     window.setInterval(function() {
-        const cells = $('td');
+        const cells = $('#tickytable td');
+        if (cells.length === 0) return;
         if (oldBackgroundColor !== null && oldCellIndex !== null) {
             $(cells[oldCellIndex]).css('backgroundColor', oldBackgroundColor);
         }
@@ -44,4 +53,3 @@ window.onload = () => {
         oldCellIndex = cellIndex;
     }, 2000);
 };
-

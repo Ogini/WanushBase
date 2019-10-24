@@ -1,12 +1,12 @@
 <?php
 /**
- * Dependencies.php
- * Date: 10.08.2016
- * Time: 16:38
- * PHP version 5
+ * Project: WanushBaseGH
+ * File: Dependencies.php
+ * Date: 24/10/2019, 12:07
+ * Last Change; 24/10/2019, 10:03
  *
- * @author    Michael Wanush <michael.wanush@sunzinet.com>
- * @copyright 2016 sunzinet AG
+ * @author Michael Wanush <mike@wanush.net>
+ * @copyright 2019 Michael Wanush
  */
 
 use Auryn\Injector;
@@ -18,13 +18,17 @@ $injector->share('Http\HttpRequest');
 $injector->define(
     'Http\HttpRequest',
     [
-        ':get' => $_GET,
-        ':post' => $_POST,
-        ':cookies' => $_COOKIE,
-        ':files' => $_FILES,
-        ':server' => $_SERVER,
+        $_GET,
+        $_POST,
+        $_COOKIE,
+        $_FILES,
+        $_SERVER,
+        file_get_contents('php://input')
     ]
 );
+
+$injector->share('Wanush\Utility\Environment');
+$injector->define('Wanush\Utility\Environment', [$configuration]);
 
 $injector->alias('Http\Response', 'Http\HttpResponse');
 $injector->share('Http\HttpResponse');

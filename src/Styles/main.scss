@@ -1,3 +1,36 @@
+/*!
+ * Project: WanushBaseGH
+ * File: main.scss
+ * Date: 24/10/2019, 12:04
+ * Last Change; 24/10/2019, 12:04
+ *
+ * @author Michael Wanush <mike@wanush.net>
+ * @copyright 2019 Michael Wanush
+ */
+
 body {
-  background-color: #b9bbbe;
+  background-color: seashell;
+}
+
+.card-title {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.slidetext-enter {
+  width: 0;
+}
+
+.slidetext-enter-active {
+  width: 100%;
+  transition: width 300ms;
+}
+
+.slidetext-exit {
+  width: 100%;
+}
+
+.slidetext-exit-active {
+  width: 0;
+  transition: width 300ms;
 }

@@ -1,12 +1,12 @@
 <?php
 /**
- * Bootstrap.php
- * Date: 10.08.2016
- * Time: 16:31
- * PHP version 5
+ * Project: WanushBaseGH
+ * File: Bootstrap.php
+ * Date: 24/10/2019, 12:06
+ * Last Change; 22/10/2019, 18:03
  *
- * @author    Michael Wanush <michael.wanush@sunzinet.com>
- * @copyright 2016 sunzinet AG
+ * @author Michael Wanush <mike@wanush.net>
+ * @copyright 2019 Michael Wanush
  */
 
 namespace Wanush;

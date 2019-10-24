@@ -1,17 +1,18 @@
 <?php
 /**
- * Connection.php
- * Date: 10.08.2016
- * Time: 17:30
- * PHP version 5
+ * Project: WanushBaseGH
+ * File: Connection.php
+ * Date: 24/10/2019, 12:01
+ * Last Change; 24/10/2019, 12:01
  *
- * @author    Michael Wanush <michael.wanush@sunzinet.com>
- * @copyright 2016 sunzinet AG
+ * @author Michael Wanush <mike@wanush.net>
+ * @copyright 2019 Michael Wanush
  */
 
 namespace Wanush\Database;
 
 use PDO;
+use PDOException;
 
 /**
  * Class Connection
@@ -25,8 +26,7 @@ class Connection extends PDO
      *
      * @param array $connectionData Connection Data Array
      */
-    public function __construct($connectionData)
-    {
+    public function __construct($connectionData) {
         /** @var string $host */
         /** @var string $dbname */
         /** @var string $user */
@@ -42,5 +42,28 @@ class Connection extends PDO
         ];
 
         parent::__construct($dsn, $user, $pass, $options);
+    }
+
+    /**
+     * @param string $tableName
+     * @param int $fetchStyle
+     * @return array
+     * @throws PDOException
+     */
+    public function selectAll($tableName, $fetchStyle = PDO::FETCH_ASSOC) {
+        return $this->select($tableName, '*', $fetchStyle);
+    }
+
+    /**
+     * @param string $tableName
+     * @param mixed $fields
+     * @param int $fetchStyle
+     * @return array
+     */
+    public function select($tableName, $fields, $fetchStyle = PDO::FETCH_ASSOC) {
+        if (is_array($fields)) {
+            $fields = implode(', ', $fields);
+        }
+        return $this->query('SELECT ' . $fields . ' FROM ' . $tableName)->fetchAll($fetchStyle);
     }
 }

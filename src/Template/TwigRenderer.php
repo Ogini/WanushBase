@@ -1,12 +1,12 @@
 <?php
 /**
- * TwigRenderer.php
- * Date: 10.08.2016
- * Time: 17:30
- * PHP version 5
+ * Project: WanushBaseGH
+ * File: TwigRenderer.php
+ * Date: 24/10/2019, 12:05
+ * Last Change; 11/09/2019, 11:33
  *
- * @author    Michael Wanush <michael.wanush@sunzinet.com>
- * @copyright 2016 sunzinet AG
+ * @author Michael Wanush <mike@wanush.net>
+ * @copyright 2019 Michael Wanush
  */
 
 namespace Wanush\Template;

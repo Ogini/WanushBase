@@ -1,12 +1,12 @@
 <?php
 /**
- * Config.php
- * Date: 10.08.2016
- * Time: 16:32
- * PHP version 5
+ * Project: WanushBaseGH
+ * File: Config.php.example
+ * Date: 24/10/2019, 12:06
+ * Last Change; 24/10/2019, 10:09
  *
- * @author    Michael Wanush <michael.wanush@sunzinet.com>
- * @copyright 2016 sunzinet AG
+ * @author Michael Wanush <mike@wanush.net>
+ * @copyright 2019 Michael Wanush
  */
 
 return [
