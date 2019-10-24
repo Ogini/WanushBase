@@ -12,6 +12,7 @@
 namespace Wanush\Utility;
 
 use Exception;
+use InvalidArgumentException;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\ValidationData;
@@ -100,12 +101,16 @@ class Jwt
      * @throws Exception
      */
     private function parseToken($token, &$newToken) {
-        $token = (new Parser())->parse((string)$token);
+        try {
+            $token = (new Parser())->parse((string)$token);
+        } catch (InvalidArgumentException $ex) {
+            return 0;
+        }
 
         $data = new ValidationData();
         $data->setIssuer($this->environment->getConfigVar('url'));
         $data->setAudience($this->environment->getConfigVar('url'));
-        $data->setId('abba123agnetha456');
+        $data->setId(self::JWT_IDENTIFIER);
 
         if ($token->validate($data)) {
             $uid = (int)$token->getClaim('uid');
