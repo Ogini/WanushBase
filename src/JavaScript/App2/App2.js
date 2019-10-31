@@ -8,15 +8,29 @@
  * @copyright 2019 Michael Wanush
  */
 
-import React, {useState} from 'react';
-import {Spinner, Button, Form} from 'react-bootstrap';
+import React, {useState, useEffect} from 'react';
+import {Spinner} from 'react-bootstrap';
+import LoginForm from "./LoginForm";
+import App2Text from "./App2Text";
+
+const useStateWithLocalStorage = localStorageKey => {
+    const [value, setValue] = useState(
+        localStorage.getItem(localStorageKey) || ''
+    );
+
+    useEffect(() => {
+        localStorage.setItem(localStorageKey, value);
+    }, [value]);
+
+    return [value, setValue];
+};
 
 function App2() {
-    const [show, setShow] = useState(false);
-    const [login, setLogin] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(false);
     const [validated, setValidated] = useState(false);
-    const [jwt, setJwt] = useState('');
+    const [login, setLogin] = useState(false);
+    const [jwt, setJwt] = useStateWithLocalStorage('jwt');
+    const [loggedIn, setLoggedIn] = useState(jwt !== '');
+    const [show, setShow] = useState(jwt !== '');
 
     const handleLogin = event => {
         const form = event.currentTarget;
@@ -59,7 +73,6 @@ function App2() {
         })
             .then(response => response.json())
             .then(json => {
-                console.log(json);
                 if (json.token) {
                     setJwt(json.token);
                 }
@@ -68,39 +81,11 @@ function App2() {
 
     if (show && !login) {
         return (
-            <div>
-                <p>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                    labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-                    et earebum. Stetclita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                    et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-                    rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                    et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-                    rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                </p>
-                {loggedIn
-                    ? <Button variant="primary" onClick={() => testJwt()}>Test</Button>
-                    : <Button variant="primary" onClick={() => setLogin(true)}>Login</Button>
-                }
-            </div>
+            <App2Text loggedIn={loggedIn} onClick={() => testJwt()} onClick1={() => setLogin(true)}/>
         )
     } else if (login) {
         return (
-            <Form noValidate validated={validated} onSubmit={handleLogin}>
-                <Form.Group controlId="loginUsername">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control type="text" placeholder="Enter username" required name="username" />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group controlId="loginPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" required name="password" />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                </Form.Group>
-                <Button variant="primary" type="submit">Login</Button>
-            </Form>
+            <LoginForm validated={validated} onSubmit={handleLogin}/>
         )
     } else {
         setTimeout(() => {
