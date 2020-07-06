@@ -11,10 +11,10 @@
 
 namespace Wanush\Template;
 
-use Twig_Environment;
-use Twig_Error_Loader;
-use Twig_Error_Runtime;
-use Twig_Error_Syntax;
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  * Class TwigRenderer
@@ -33,9 +33,9 @@ class TwigRenderer implements Renderer
     /**
      * TwigRenderer constructor.
      *
-     * @param Twig_Environment $renderer Renderer
+     * @param Environment $renderer Renderer
      */
-    public function __construct(Twig_Environment $renderer)
+    public function __construct(Environment $renderer)
     {
         $this->renderer = $renderer;
     }
@@ -47,9 +47,9 @@ class TwigRenderer implements Renderer
      * @param array $data Data
      *
      * @return string
-     * @throws Twig_Error_Loader
-     * @throws Twig_Error_Runtime
-     * @throws Twig_Error_Syntax
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function render($template, array $data = [])
     {

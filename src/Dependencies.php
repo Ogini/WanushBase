@@ -40,11 +40,11 @@ $injector->define(
 $injector->alias('Wanush\Template\Renderer', 'Wanush\Template\TwigRenderer');
 
 $injector->delegate(
-    'Twig_Environment',
+    'Twig\Environment',
     function () use ($injector) {
-        $loader = new Twig_Loader_Filesystem(dirname(__DIR__) . '/templates');
-        $twig = new Twig_Environment($loader, array('debug' => true));
-        $twig->addExtension(new Twig_Extension_Debug());
+        $loader = new Twig\Loader\FilesystemLoader(dirname(__DIR__) . '/templates');
+        $twig = new Twig\Environment($loader, array('debug' => true));
+        $twig->addExtension(new Twig\Extension\DebugExtension());
         return $twig;
     }
 );
