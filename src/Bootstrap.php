@@ -15,9 +15,11 @@ use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 use Http\HttpRequest;
 use Http\HttpResponse;
+use Illuminate\Container\Container;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
 use function FastRoute\simpleDispatcher;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 define('PATH_BASE', __DIR__ . '/../');
 
@@ -40,6 +42,15 @@ if ($environment !== 'production') {
     });
 }
 $whoops->register();
+
+/**
+ * Illuminate
+ */
+$capsule = new Capsule();
+$capsule->addConnection($configuration['database']);
+$capsule->setEventDispatcher(new \Illuminate\Events\Dispatcher(new Container()));
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
 
 $injector = include __DIR__ . '/Dependencies.php';
 

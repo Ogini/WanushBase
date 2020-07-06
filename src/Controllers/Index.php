@@ -11,9 +11,7 @@
 
 namespace Wanush\Controllers;
 
-
-use PDO;
-use PDOException;
+use Wanush\Models\User;
 
 /**
  * Class Index
@@ -30,17 +28,11 @@ class Index extends BaseController
     public function index()
     {
         $this->data['name'] = 'Testing 1, 2, 3';
-        try {
-            $this->data['table'] = [
-                'success' => true,
-                'data' => $this->db->query('SELECT * FROM users')->fetchAll(PDO::FETCH_ASSOC)
-            ];
-        } catch (PDOException $e) {
-            $this->data['table'] = [
-                'success' => true,
-                'error' => $e->getMessage()
-            ];
-        }
+
+        $this->data['table'] = [
+            'success' => true,
+            'data' => User::query()->get()->toArray()
+        ];
 
         $this->render();
     }

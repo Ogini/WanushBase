@@ -11,7 +11,6 @@ namespace Wanush\Controllers;
 use Http\Request;
 use Http\Response;
 use Wanush\Template\Renderer;
-use Wanush\Database\Connection;
 
 /**
  * Class BaseController
@@ -38,12 +37,6 @@ class BaseController
      */
     protected $renderer;
     /**
-     * Database Connection
-     *
-     * @var Connection
-     */
-    protected $db;
-    /**
      * Display Data
      *
      * @var array
@@ -56,14 +49,12 @@ class BaseController
      * @param Request    $request    Request
      * @param Response   $response   Response
      * @param Renderer   $renderer   Renderer
-     * @param Connection $connection Connection
      */
-    public function __construct(Request $request, Response $response, Renderer $renderer, Connection $connection)
+    public function __construct(Request $request, Response $response, Renderer $renderer)
     {
         $this->request = $request;
         $this->response = $response;
         $this->renderer = $renderer;
-        $this->db = $connection;
 
         $this->init();
     }

@@ -4,7 +4,7 @@
     <table class="table table-bordered table-hover table-striped">
         <thead>
         <tr>
-            {% set row = table.data|first %}
+            {% set row = table.data|first|cast_to_array %}
             {% for key in row|keys %}
                 <th>{{ key }}</th>
             {% endfor %}
@@ -13,7 +13,7 @@
         <tbody>
         {% for row in table.data %}
             <tr>
-                {% for column in row %}
+                {% for column in row|cast_to_array %}
                     <td>{{ column }}</td>
                 {% endfor %}
             </tr>

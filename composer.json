@@ -20,7 +20,13 @@
     "swiftmailer/swiftmailer": "^6.2",
     "twitter/bootstrap": "^4.3",
     "components/jquery": "~3.5.1",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "illuminate/database": "^7.18",
+    "illuminate/console": "^7.18",
+    "illuminate/events": "^7.18",
+    "illuminate/filesystem": "^7.18",
+    "illuminate/pagination": "^7.18",
+    "symfony/finder": "^5.1"
   },
   "require-dev": {},
   "autoload": {

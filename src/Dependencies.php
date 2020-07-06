@@ -29,14 +29,6 @@ $injector->define(
 $injector->alias('Http\Response', 'Http\HttpResponse');
 $injector->share('Http\HttpResponse');
 
-$injector->share('Wanush\Database\Connection');
-$injector->define(
-    'Wanush\Database\Connection',
-    [
-        ':connectionData' => $configuration['database']
-    ]
-);
-
 $injector->alias('Wanush\Template\Renderer', 'Wanush\Template\TwigRenderer');
 
 $injector->delegate(
@@ -45,6 +37,15 @@ $injector->delegate(
         $loader = new Twig\Loader\FilesystemLoader(dirname(__DIR__) . '/templates');
         $twig = new Twig\Environment($loader, array('debug' => true));
         $twig->addExtension(new Twig\Extension\DebugExtension());
+
+        $twig->addFilter( new Twig\TwigFilter('cast_to_array', function ($stdClassObject) {
+            $response = array();
+            foreach ($stdClassObject as $key => $value) {
+                $response[$key] = $value;
+            }
+            return $response;
+        }));
+
         return $twig;
     }
 );
